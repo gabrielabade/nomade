@@ -1878,3 +1878,9 @@ footer {
     width: 100%;
   }
 }
+.imagem-responsiva {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
