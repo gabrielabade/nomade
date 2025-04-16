@@ -1,13 +1,21 @@
 /* RESET E VARIÁVEIS */
 :root {
-  --primary: #87CEEB; /* Sky Blue */
-  --primary-dark: #6A5ACD; /* Slate Blue */
-  --secondary: #FFB6C1; /* Light Pink */
-  --dark: #9370DB; /* Medium Purple */
-  --light: #E6E6FA; /* Lavender */
-  --accent: #FF69B4; /* Hot Pink */
-  --accent-secondary: #BA55D3; /* Medium Orchid */
-  --text: #4B0082; /* Indigo */
+  --primary: #87CEEB;
+  /* Sky Blue */
+  --primary-dark: #6A5ACD;
+  /* Slate Blue */
+  --secondary: #FFB6C1;
+  /* Light Pink */
+  --dark: #9370DB;
+  /* Medium Purple */
+  --light: #E6E6FA;
+  /* Lavender */
+  --accent: #FF69B4;
+  /* Hot Pink */
+  --accent-secondary: #BA55D3;
+  /* Medium Orchid */
+  --text: #4B0082;
+  /* Indigo */
   --radius: 12px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
@@ -441,6 +449,175 @@ nav {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-top: 35px;
+}
+
+/* Seção Timeline e Pedido de Casamento */
+.timeline-section {
+  background-color: rgba(106, 90, 205, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 40px;
+}
+
+.timeline-container {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+/* Coluna do pedido de casamento */
+.proposal-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.proposal-title {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: var(--primary-dark);
+  font-family: var(--font-primary);
+}
+
+.proposal-divider {
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  border: none;
+  margin: 0 0 25px;
+}
+
+.proposal-tags {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: rgba(135, 206, 235, 0.2);
+  color: var(--primary-dark);
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 0.9em;
+}
+
+.proposal-description {
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.proposal-image-container {
+  margin-bottom: 10px;
+}
+
+.proposal-image-container img {
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease;
+}
+
+.proposal-image-container img:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+/* Coluna da timeline */
+.timeline-column {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 20px;
+  margin-top: 3.5rem;
+}
+
+.timeline:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+  border-radius: 3px;
+}
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 25px;
+  /* Reduced space between items */
+  position: relative;
+}
+
+.timeline-date {
+  margin-bottom: 5px;
+  /* Reduced space below the date */
+  color: var(--primary-dark);
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+  position: relative;
+  left: -15px;
+}
+
+.timeline-content {
+  background-color: #f0f0ff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.1);
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+}
+
+.timeline-item.highlight .timeline-content {
+  background-color: #e3f2fd;
+  border-left: 3px solid var(--primary-dark);
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.2);
+}
+
+.proposal-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.proposal-image {
+  flex: 1;
+  min-width: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.proposal-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.proposal-image:nth-child(1) img {
+  transform: rotate(-2deg);
+}
+
+.proposal-image:nth-child(2) img {
+  transform: rotate(1deg);
+}
+
+.proposal-image img:hover {
+  transform: rotate(0deg) scale(1.05);
 }
 
 .feature-item {
@@ -1730,6 +1907,65 @@ footer:before {
     right: 20px;
     max-width: 250px;
     font-size: 12px;
+  }
+
+  .flex-row {
+    flex-direction: column;
+  }
+
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .second-row {
+    flex-direction: column-reverse;
+    /* Mostra a timeline antes do pedido em mobile */
+  }
+
+  .timeline-container {
+    flex-direction: column;
+  }
+
+  .timeline-column {
+    margin-top: 30px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: -70px;
+    margin-top: 0;
+  }
+
+  .timeline::before {
+    margin-left: 40px;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 40px;
+  }
+
+  .timeline-date {
+    position: relative;
+    margin-bottom: 10px;
+    text-align: left;
+    left: 0;
+  }
+
+  .timeline-content {
+    margin-left: 0;
+  }
+
+  .proposal-images-container {
+    flex-direction: column;
+  }
+
+  .proposal-image {
+    width: 100%;
   }
 }
 
