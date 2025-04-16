@@ -1,5 +1,3 @@
-// Funções e interatividade para o site VanClaren's
-
 // Toggle do Menu Mobile
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
@@ -404,3 +402,36 @@ document.addEventListener('keydown', function (e) {
     konamiIndex = 0;
   }
 });
+
+// Função debounce para otimizar scroll
+function debounce(func, wait = 100) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
+// Aplicando debounce ao scroll
+window.removeEventListener('scroll', destacarNavegacaoAoRolar);
+window.addEventListener('scroll', debounce(destacarNavegacaoAoRolar));
+window.removeEventListener('scroll', animarAoRolar);
+window.addEventListener('scroll', debounce(animarAoRolar));
+
+// Toast message para feedbacks
+function showToast(mensagem) {
+  const toast = document.createElement('div');
+  toast.textContent = mensagem;
+  toast.style.position = 'fixed';
+  toast.style.bottom = '20px';
+  toast.style.right = '20px';
+  toast.style.padding = '12px 20px';
+  toast.style.background = '#4D77FF';
+  toast.style.color = '#fff';
+  toast.style.borderRadius = '8px';
+  toast.style.zIndex = '9999';
+  toast.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+  toast.style.fontWeight = '600';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
