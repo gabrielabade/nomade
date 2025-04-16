@@ -435,3 +435,22 @@ function showToast(mensagem) {
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 4000);
 }
+
+
+// Garantir que os links de social-pill funcionem
+document.addEventListener('DOMContentLoaded', function () {
+  const socialPills = document.querySelectorAll('.social-pill');
+
+  socialPills.forEach(pill => {
+    pill.addEventListener('click', function (e) {
+      // Evita que o evento de clique seja capturado por outros manipuladores
+      e.stopPropagation();
+
+      // Pega o URL do atributo href
+      const url = this.getAttribute('href');
+
+      // Abre o URL em uma nova aba
+      window.open(url, '_blank');
+    });
+  });
+});

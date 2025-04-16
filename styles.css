@@ -1824,6 +1824,8 @@ footer:before {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
 }
 
 .social-pill {
@@ -1837,6 +1839,9 @@ footer:before {
   font-size: 14px;
   text-decoration: none;
   transition: var(--transition);
+  position: relative;
+  z-index: 5;
+  cursor: pointer;
 }
 
 .social-pill:hover {
@@ -2255,6 +2260,7 @@ footer:before {
     .footer-grid {
       grid-template-columns: 1fr;
     }
+
     .contacts-grid {
       grid-template-columns: 1fr;
       gap: 50px;
