@@ -46,12 +46,12 @@
             código e viagens em projetos digitais únicos.</p>
           <div class="hero-buttons">
             <a class="btn" href="#servicos">Nossos Serviços <i class="fas fa-code"></i></a>
-            <a class="btn btn-outline" href="#contato">Fale Conosco <i class="fas fa-envelope"></i></a>
+            <a class="btn btn-outline" href="#contato">Fale Conosco <i class="fas fa-phone"></i></a>
           </div>
         </div>
         <div class="kombi-image-container">
-          <div class="placeholder-container">
-            <img alt="Imagem da Kombi 'Patrice'" class="placeholder-text" src="images/gabriela-bruno.jpeg" />
+          <div class="hero-image-wrapper">
+            <img alt="Imagem da Kombi 'Patrice'" class="imagem-responsiva" src="images/gabriela-bruno.jpeg" />
           </div>
         </div>
       </div>
@@ -195,6 +195,60 @@
       </div>
     </section>
 
+    <section class="services" id="servicos">
+      <div class="container">
+        <div class="section-header">
+          <h2>Nossos Serviços</h2>
+          <p>Oferecemos soluções digitais de qualidade, desenvolvidas com paixão e expertise
+            técnica</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Desenvolvimento Front-end</h3>
+            <p>Gabriela cria sites responsivos, rápidos e otimizados para SEO. Especialista
+              em HTML,
+              CSS e JavaScript para entregar interfaces perfeitas para seus usuários.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-server"></i></div>
+            <h3>Desenvolvimento Back-end</h3>
+            <p>Bruno constrói APIs e sistemas robustos em Python, criando a estrutura
+              necessária
+              para que suas aplicações funcionem perfeitamente.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-tools"></i></div>
+            <h3>Infraestrutura e Suporte</h3>
+            <p>Configuração de servidores, formatação de computadores e instalação de
+              software.
+              Bruno gerencia toda a infraestrutura para seu negócio.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+            <h3>UI/UX Design</h3>
+            <p>Design de interfaces intuitivas e atraentes, com foco na usabilidade e na
+              criação de
+              experiências memoráveis para seus usuários.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-globe"></i></div>
+            <h3>Sites Estáticos</h3>
+            <p>Especialidade da Gabriela! Criação de landing pages, portfólios e sites
+              institucionais com carregamento rápido e alta performance.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>Consultoria Técnica</h3>
+            <p>Análise e consultoria em projetos digitais, ajudando sua empresa a tomar as
+              melhores
+              decisões tecnológicas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="projects" id="projetos">
       <div class="container">
         <div class="section-header">
@@ -259,13 +313,7 @@
               para clientes de todo o país. Não deixe a distância impedir uma parceria
               incrível!</p>
             <div class="contact-details">
-              <div class="contact-item">
-                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                <div>
-                  <h4>Email</h4>
-                  <p>contato@gbconnect.digital</p>
-                </div>
-              </div>
+
               <div class="contact-item">
                 <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                 <div>
@@ -297,10 +345,6 @@
                 <input class="form-input" id="name" placeholder="Seu nome completo" required="" type="text" />
               </div>
               <div class="form-group">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-input" id="email" placeholder="seu@email.com" required="" type="email" />
-              </div>
-              <div class="form-group">
                 <label class="form-label" for="subject">Assunto</label>
                 <input class="form-input" id="subject" placeholder="Do que se trata?" required="" type="text" />
               </div>
@@ -321,33 +365,17 @@
   <footer role="contentinfo">
     <div class="container">
       <div class="footer-grid">
-        <div>
+        <!-- Coluna 1: Logo e texto -->
+        <div class="footer-column">
           <a class="footer-logo" href="#">
             <span><i class="fas fa-shuttle-van"></i></span> VanClaren's
           </a>
-          <p class="footer-about">Transformando código em liberdade. Somos Gabriela e
-            Bruno, um
-            casal de desenvolvedores vivendo e trabalhando em uma Kombi, conectando
-            paixão
-            por tecnologia e exploração.</p>
-          <div class="social-links">
-            <a class="social-link" href="https://www.instagram.com/incrivilhosa" target="_blank"
-              title="Instagram da Gabriela">
-              <span><i class="fab fa-instagram"></i> Gabriela</span>
-            </a>
-            <a class="social-link" href="https://www.instagram.com/incrivilhoso" target="_blank"
-              title="Instagram do Bruno">
-              <span><i class="fab fa-instagram"></i> Bruno</span>
-            </a>
-            <a class="social-link" href="https://wa.me/5548991056014" target="_blank">
-              <span><i class="fab fa-whatsapp"></i></span>
-            </a>
-            <a class="social-link" href="mailto:contato@gbconnect.digital">
-              <span><i class="fas fa-envelope"></i></span>
-            </a>
-          </div>
+          <p class="footer-about">Transformando código em liberdade. Somos Gabriela e Bruno, um casal de desenvolvedores
+            vivendo e trabalhando em uma Kombi, conectando paixão por tecnologia e exploração.</p>
         </div>
-        <div>
+
+        <!-- Coluna 2: Links rápidos -->
+        <div class="footer-column">
           <h4 class="footer-heading">Links Rápidos</h4>
           <div class="footer-links">
             <a href="#sobre">Sobre Nós</a>
@@ -357,7 +385,9 @@
             <a href="#contato">Contato</a>
           </div>
         </div>
-        <div>
+
+        <!-- Coluna 3: Serviços -->
+        <div class="footer-column">
           <h4 class="footer-heading">Serviços</h4>
           <div class="footer-links">
             <a href="#servicos">Front-end (Gabriela)</a>
@@ -367,20 +397,52 @@
             <a href="#servicos">Consultoria Técnica</a>
           </div>
         </div>
-        <div>
+
+        <!-- Coluna 4: Contatos -->
+        <div class="footer-column">
           <h4 class="footer-heading">Frases Favoritas da Série</h4>
           <div class="footer-links">
-            <a href="javascript:showRandomQuote('Desafio Aceito!');">Desafio
-              Aceito!</a>
-            <a href="javascript:showRandomQuote('LEGEN... ESPERA UM POUCO... DÁRIO!');">LEGEN...
-              ESPERA UM POUCO... DÁRIO!</a>
-            <a href="javascript:showRandomQuote('História real.');">História
-              real</a>
-            <a href="javascript:showRandomQuote('Temos um código!');">Temos um
-              código!</a>
+            <a href="javascript:showRandomQuote('Desafio Aceito!');">Desafio Aceito!</a>
+            <a href="javascript:showRandomQuote('LEGEN... ESPERA UM POUCO... DÁRIO!');">LEGEN... ESPERA UM POUCO...
+              DÁRIO!</a>
+            <a href="javascript:showRandomQuote('História real.');">História real</a>
+            <a href="javascript:showRandomQuote('Temos um código!');">Temos um código!</a>
           </div>
         </div>
       </div>
+
+      <!-- Seção dos contatos pessoais -->
+      <div class="footer-contacts">
+        <div class="contacts-grid">
+          <!-- Gabriela -->
+          <div class="contact-person">
+            <h5 class="person-heading">Gabriela</h5>
+            <div class="person-social-links">
+              <a href="https://www.instagram.com/incrivilhosa" target="_blank" class="social-pill">
+                <i class="fab fa-instagram"></i> Instagram
+              </a>
+              <a href="https://wa.me/5548991056014" target="_blank" class="social-pill">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- Bruno -->
+          <div class="contact-person">
+            <h5 class="person-heading">Bruno</h5>
+            <div class="person-social-links">
+              <a href="https://www.instagram.com/incrivilhoso" target="_blank" class="social-pill">
+                <i class="fab fa-instagram"></i> Instagram
+              </a>
+              <a href="https://wa.me/5551981335650" target="_blank" class="social-pill">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
       <div class="copyright">
         <p>© 2025 VanClaren's. Todos os direitos reservados. Desenvolvido por <a class="dev-link"
             href="https://gbconnect.digital" target="_blank">GBConnect.digital</a></p>

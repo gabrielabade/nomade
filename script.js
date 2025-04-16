@@ -74,14 +74,14 @@ contactForm.addEventListener('submit', (e) => {
 
   // Pegar valores do formulário
   const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
+  // Email removido conforme solicitado
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
 
   // Simular carregamento
   setTimeout(() => {
-    // Formatar mensagem para WhatsApp
-    const whatsappMessage = `*Contato do Site VanClaren's:*%0A%0A*Nome:* ${name}%0A*Email:* ${email}%0A*Assunto:* ${subject}%0A*Mensagem:* ${message}%0A%0A*LEGEN... ESPERA UM POUCO... DÁRIO!*`;
+    // Formatar mensagem para WhatsApp (sem o email)
+    const whatsappMessage = `*Contato do Site VanClaren's:*%0A%0A*Nome:* ${name}%0A*Assunto:* ${subject}%0A*Mensagem:* ${message}%0A%0A*LEGEN... ESPERA UM POUCO... DÁRIO!*`;
 
     // Criar link do WhatsApp com mensagem pré-preenchida
     const whatsappLink = `https://wa.me/5548991056014?text=${whatsappMessage}`;
