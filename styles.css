@@ -450,24 +450,14 @@ nav {
 }
 
 .about-content h3 {
-  font-size: 32px;
+  font-size: 1.5rem;
   margin-bottom: 25px;
   color: var(--dark);
   font-weight: 700;
   position: relative;
   padding-bottom: 15px;
   font-family: var(--font-primary);
-}
-
-.about-content h3:after {
-  content: '';
-  position: absolute;
-  width: 60px;
-  height: 3px;
-  background: var(--gradient);
-  bottom: 0;
-  left: 0;
-  border-radius: 2px;
+  margin-bottom: 0;
 }
 
 .about-content p {
@@ -1744,19 +1734,20 @@ footer:before {
 
 .copyright {
   text-align: center;
-  padding-top: 30px;
+  padding: 10px 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
   position: relative;
   z-index: 2;
+  
 }
 
 .dev-link {
   color: var(--accent);
   text-decoration: none;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 16px;
   transition: var(--transition);
   position: relative;
 }
@@ -2007,7 +1998,7 @@ footer:before {
 
   .invite-image {
     order: -1;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     border: none;
     background: none;
     box-shadow: none;
@@ -2073,6 +2064,7 @@ footer:before {
     flex-direction: column;
     padding: 20px;
     box-shadow: var(--shadow);
+    text-align: center;
   }
 
   .mobile-menu-btn {
