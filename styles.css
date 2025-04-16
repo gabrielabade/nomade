@@ -1,19 +1,19 @@
 /* RESET E VARIÁVEIS */
 :root {
-  --primary: #4D77FF;
-  --primary-dark: #3A56B7;
-  --secondary: #FFA447;
-  --dark: #1C1C26;
-  --light: #F8F9FC;
-  --accent: #FF4D6D;
-  --accent-secondary: #02C39A;
-  --text: #2D2D3A;
+  --primary: #87CEEB; /* Sky Blue */
+  --primary-dark: #6A5ACD; /* Slate Blue */
+  --secondary: #FFB6C1; /* Light Pink */
+  --dark: #9370DB; /* Medium Purple */
+  --light: #E6E6FA; /* Lavender */
+  --accent: #FF69B4; /* Hot Pink */
+  --accent-secondary: #BA55D3; /* Medium Orchid */
+  --text: #4B0082; /* Indigo */
   --radius: 12px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
   --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #FF8A80 100%);
-  --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, #FFCC80 100%);
+  --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #9370DB 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, #BA55D3 100%);
   --font-primary: 'Comic Sans MS', 'Segoe UI', sans-serif;
   --font-secondary: 'Montserrat', 'Segoe UI', sans-serif;
 }
