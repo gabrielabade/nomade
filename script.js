@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mobileMenuBtn && navLinks) {
     // Ensure the event listener is properly attached
-    mobileMenuBtn.addEventListener('click', function(e) {
+    mobileMenuBtn.addEventListener('click', function (e) {
       e.preventDefault(); // Prevent default behavior
       e.stopPropagation(); // Stop event from bubbling up
-      
+
       // Toggle the navigation menu
       navLinks.classList.toggle('open');
-      
+
       // Update the menu button icon and accessibility attributes
       if (navLinks.classList.contains('open')) {
         mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
       if (window.innerWidth <= 768 &&
-          navLinks.classList.contains('open') &&
-          !navLinks.contains(event.target) &&
-          !mobileMenuBtn.contains(event.target)) {
+        navLinks.classList.contains('open') &&
+        !navLinks.contains(event.target) &&
+        !mobileMenuBtn.contains(event.target)) {
         navLinks.classList.remove('open');
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
@@ -82,3 +82,64 @@ function debounce(func, wait = 100) {
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
 }
+
+
+// Função para copiar a chave PIX
+document.addEventListener('DOMContentLoaded', () => {
+  const copyPIXButton = document.getElementById('copy-pix');
+  const copyMessage = document.getElementById('copy-message');
+
+  if (copyPIXButton && copyMessage) {
+    copyPIXButton.addEventListener('click', () => {
+      // Pegar o texto da chave PIX
+      const pixKey = document.querySelector('.pix-key').textContent;
+
+      // Copiar para a área de transferência
+      navigator.clipboard.writeText(pixKey)
+        .then(() => {
+          // Mostrar mensagem de sucesso
+          copyMessage.style.display = 'block';
+
+          // Adicionar efeito de confete (se a função existir)
+          if (typeof criarConfete === 'function') {
+            criarConfete();
+          }
+
+          // Esconder a mensagem após 3 segundos
+          setTimeout(() => {
+            copyMessage.style.display = 'none';
+          }, 3000);
+        })
+        .catch(err => {
+          console.error('Erro ao copiar: ', err);
+
+          // Alternativa para navegadores que não suportam clipboard API
+          const textArea = document.createElement('textarea');
+          textArea.value = pixKey;
+          textArea.style.position = 'fixed';  // Fora da tela
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+
+          try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+              copyMessage.style.display = 'block';
+
+              if (typeof criarConfete === 'function') {
+                criarConfete();
+              }
+
+              setTimeout(() => {
+                copyMessage.style.display = 'none';
+              }, 3000);
+            }
+          } catch (err) {
+            console.error('Fallback: Erro ao copiar', err);
+          }
+
+          document.body.removeChild(textArea);
+        });
+    });
+  }
+});
