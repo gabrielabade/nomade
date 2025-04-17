@@ -11,9 +11,49 @@
   <title>VanClaren's | Gabriela & Bruno em uma Kombi</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Preload de recursos críticos -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-solid-900.woff2"
+    as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/fa-brands-400.woff2"
+    as="font" type="font/woff2" crossorigin>
+
+  <!-- Adicionar atributo defer no script -->
+  <script src="script.js" defer></script>
+
+  <!-- Dados estruturados para SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "VanClaren's - Gabriela & Bruno",
+    "description": "Desenvolvimento web e liberdade na estrada. Somos Gabriela e Bruno, casal de desenvolvedores nômades trabalhando em nossa Kombi.",
+    "url": "https://vanclarens.com.br",
+    "founders": [
+      {
+        "@type": "Person",
+        "name": "Gabriela",
+        "jobTitle": "Desenvolvedora Front-end"
+      },
+      {
+        "@type": "Person",
+        "name": "Bruno",
+        "jobTitle": "Desenvolvedor Back-end"
+      }
+    ],
+    "areaServed": "Brasil",
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "Python", "Desenvolvimento web", "UI/UX Design"],
+    "sameAs": [
+      "https://www.instagram.com/incrivilhosa",
+      "https://www.instagram.com/incrivilhoso",
+      "https://gbconnect.digital"
+    ]
+  }
+  </script>
 </head>
 
 <body>
+  <a href="#main-content" class="skip-to-content">Pular para o conteúdo</a>
   <header role="banner">
     <nav aria-label="Menu principal">
       <div class="container nav-container">
@@ -84,7 +124,8 @@
         </div>
         <div class="kombi-image-container">
           <div class="hero-image-wrapper">
-            <img alt="Imagem da Kombi 'Patrice'" class="imagem-responsiva" src="images/gabriela-bruno.jpeg" />
+            <img alt="Imagem da Kombi 'Patrice'" class="imagem-responsiva" src="images/gabriela-bruno.jpeg"
+              loading="lazy" />
           </div>
         </div>
       </div>
@@ -129,7 +170,8 @@
 
           <!-- Foto da Kombi -->
           <div class="about-image-container">
-            <img alt="Foto de Gabriela e Bruno com a Kombi" class="imagem-responsiva" src="images/vanclarens.jpeg" />
+            <img alt="Foto de Gabriela e Bruno com a Kombi" class="imagem-responsiva" src="images/vanclarens.jpeg"
+              loading="lazy" />
           </div>
         </div>
 
@@ -159,12 +201,12 @@
               <!-- Imagem do jornal -->
               <div class="proposal-images-container">
                 <div class="proposal-image">
-                  <img alt="Imagem adicional do pedido de casamento" class="imagem-responsiva"
-                    src="images/pedido.png" />
+                  <img alt="Imagem adicional do pedido de casamento" class="imagem-responsiva" src="images/pedido.png"
+                    loading="lazy" />
                 </div>
                 <div class="proposal-image">
                   <img alt="Imagem da reportagem do pedido de casamento no jornal" class="imagem-responsiva"
-                    src="images/pedido-casamento-jornal.png" />
+                    src="images/pedido-casamento-jornal.png" loading="lazy" />
                 </div>
               </div>
             </div>
@@ -304,7 +346,7 @@
           </div>
           <div class="invite-image">
             <img alt="Logo da GBConnect.digital" class="imagem-responsiva" src="images/gbconnect.png"
-              style="width: 100%; max-width: 400px;" />
+              style="width: 100%; max-width: 400px;" loading="lazy" />
           </div>
         </div>
       </div>
@@ -320,14 +362,17 @@
           Barney Stinson: "Vai ser LEGEN... ESPERA UM POUCO... DÁRIO!"</p>
         <div class="pix-container">
           <div class="pix-qr">
-            <img alt="QR Code PIX" class="imagem-responsiva" src="images/qrcode-pix.jpeg" width="200" height="auto" />
+            <img alt="QR Code PIX" class="imagem-responsiva" src="images/qrcode-pix.jpeg" width="200" height="auto"
+              loading="lazy" />
           </div>
           <div class="pix-key">48991056014</div>
-          <button class="pix-copy" id="copy-pix">
+          <button class="pix-copy" id="copy-pix" aria-label="Copiar chave PIX para área de transferência">
             <span>Copiar chave PIX</span>
-            <span><i class="fas fa-copy"></i></span>
+            <span><i class="fas fa-copy" aria-hidden="true"></i></span>
           </button>
-          <div class="contribution-message" id="copy-message">Chave PIX copiada com sucesso!</div>
+          <div class="contribution-message" id="copy-message" aria-live="polite" role="status">Chave PIX copiada com
+            sucesso!
+          </div>
         </div>
       </div>
     </section>
@@ -395,6 +440,7 @@
   </main>
   <!-- HIMYM Quote Popup -->
   <div id="himym-quote" aria-live="polite" role="status" class="sr-only"></div>
+
   <footer role="contentinfo">
     <div class="container">
       <div class="footer-grid">
@@ -490,8 +536,7 @@
   <div class="back-to-top" id="backToTop">
     <i class="fas fa-arrow-up"></i>
   </div>
-
-  <script src="script.js"></script>
+  
 </body>
 
 </html>

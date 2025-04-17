@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
 
   if (mobileMenuBtn && navLinks) {
-    // Ensure the event listener is properly attached
     mobileMenuBtn.addEventListener('click', function (e) {
-      e.preventDefault(); // Prevent default behavior
-      e.stopPropagation(); // Stop event from bubbling up
+      e.preventDefault();
+      e.stopPropagation();
 
       // Toggle the navigation menu
       navLinks.classList.toggle('open');
@@ -49,11 +48,205 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Função para copiar a chave PIX
+  const copyPIXButton = document.getElementById('copy-pix');
+  const copyMessage = document.getElementById('copy-message');
+
+  if (copyPIXButton && copyMessage) {
+    copyPIXButton.addEventListener('click', () => {
+      // Pegar o texto da chave PIX
+      const pixKey = document.querySelector('.pix-key').textContent;
+
+      // Copiar para a área de transferência
+      navigator.clipboard.writeText(pixKey)
+        .then(() => {
+          // Mostrar mensagem de sucesso
+          copyMessage.style.display = 'block';
+
+          // Adicionar efeito de confete
+          criarConfete();
+
+          // Esconder a mensagem após 3 segundos
+          setTimeout(() => {
+            copyMessage.style.display = 'none';
+          }, 3000);
+        })
+        .catch(err => {
+          console.error('Erro ao copiar: ', err);
+
+          // Alternativa para navegadores que não suportam clipboard API
+          const textArea = document.createElement('textarea');
+          textArea.value = pixKey;
+          textArea.style.position = 'fixed';  // Fora da tela
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+
+          try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+              copyMessage.style.display = 'block';
+              criarConfete();
+
+              setTimeout(() => {
+                copyMessage.style.display = 'none';
+              }, 3000);
+            }
+          } catch (err) {
+            console.error('Fallback: Erro ao copiar', err);
+          }
+
+          document.body.removeChild(textArea);
+        });
+    });
+  }
+
+  // Formulário de contato com redirecionamento para WhatsApp
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Obter valores do formulário
+      const name = document.getElementById('name').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Validar campos
+      if (!name || !subject || !message) {
+        alert('Por favor, preencha todos os campos do formulário.');
+        return;
+      }
+
+      // Número de WhatsApp - use o seu número
+      const whatsappNumber = '5548991056014';
+
+      // Construir a mensagem formatada
+      const formattedMessage =
+        `*Contato via Site da Kombi:*\n\n` +
+        `*Nome:* ${name}\n` +
+        `*Assunto:* ${subject}\n\n` +
+        `*Mensagem:*\n${message}`;
+
+      // Codificar a mensagem para URL
+      const encodedMessage = encodeURIComponent(formattedMessage);
+
+      // Criar URL do WhatsApp
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      // Mostrar animação antes de redirecionar
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+
+      // Mudar o texto do botão e adicionar spinner
+      submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecionando...';
+      submitButton.disabled = true;
+
+      // Criar efeito visual
+      contactForm.classList.add('sending');
+
+      // Criar confetes
+      criarConfete();
+
+      // Redirecionar para WhatsApp após pequeno delay para o efeito visual
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+
+        // Resetar o formulário
+        contactForm.reset();
+
+        // Retornar o botão ao estado inicial
+        submitButton.innerHTML = 'Enviar Mensagem <i class="fas fa-paper-plane"></i>';
+        submitButton.disabled = false;
+
+        // Remover classe de animação
+        contactForm.classList.remove('sending');
+
+        // Mostra mensagem de sucesso
+        const successMessage = document.createElement('div');
+        successMessage.className = 'form-success-message';
+        successMessage.innerHTML = `
+          <div style="text-align: center; padding: 15px; background-color: rgba(2, 195, 154, 0.1); color: #02C39A; border-radius: 10px; margin-bottom: 20px;">
+            <i class="fas fa-check-circle"></i> Você está sendo redirecionado para o WhatsApp!
+          </div>
+        `;
+
+        // Inserir mensagem no topo do formulário
+        contactForm.insertBefore(successMessage, contactForm.firstChild);
+
+        // Remover após 5 segundos
+        setTimeout(() => {
+          successMessage.remove();
+        }, 5000);
+
+      }, 1500);
+    });
+  }
+
+  // Adicionar smooth scroll para links internos
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return; // Ignorar links vazios
+
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        // Ajustar o scroll para compensar o menu fixo
+        const navHeight = document.querySelector('nav').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Back to top button
+  const backToTopButton = document.getElementById('backToTop');
+  if (backToTopButton) {
+    // Mostrar/ocultar botão baseado no scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    });
+
+    // Scroll para o topo quando o botão é clicado
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // Função para exibir frases aleatórias de HIMYM
+  window.showRandomQuote = function (quote) {
+    const quoteElement = document.getElementById('himym-quote');
+
+    if (quoteElement) {
+      quoteElement.textContent = quote;
+      quoteElement.classList.add('show');
+
+      setTimeout(() => {
+        quoteElement.classList.remove('show');
+      }, 5000);
+    }
+  };
 });
 
 // Efeito de confete
 function criarConfete() {
   const pixContainer = document.querySelector('.pix-container');
+
+  if (!pixContainer) return;
 
   for (let i = 0; i < 50; i++) {
     const confete = document.createElement('div');
@@ -82,64 +275,3 @@ function debounce(func, wait = 100) {
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
 }
-
-
-// Função para copiar a chave PIX
-document.addEventListener('DOMContentLoaded', () => {
-  const copyPIXButton = document.getElementById('copy-pix');
-  const copyMessage = document.getElementById('copy-message');
-
-  if (copyPIXButton && copyMessage) {
-    copyPIXButton.addEventListener('click', () => {
-      // Pegar o texto da chave PIX
-      const pixKey = document.querySelector('.pix-key').textContent;
-
-      // Copiar para a área de transferência
-      navigator.clipboard.writeText(pixKey)
-        .then(() => {
-          // Mostrar mensagem de sucesso
-          copyMessage.style.display = 'block';
-
-          // Adicionar efeito de confete (se a função existir)
-          if (typeof criarConfete === 'function') {
-            criarConfete();
-          }
-
-          // Esconder a mensagem após 3 segundos
-          setTimeout(() => {
-            copyMessage.style.display = 'none';
-          }, 3000);
-        })
-        .catch(err => {
-          console.error('Erro ao copiar: ', err);
-
-          // Alternativa para navegadores que não suportam clipboard API
-          const textArea = document.createElement('textarea');
-          textArea.value = pixKey;
-          textArea.style.position = 'fixed';  // Fora da tela
-          document.body.appendChild(textArea);
-          textArea.focus();
-          textArea.select();
-
-          try {
-            const successful = document.execCommand('copy');
-            if (successful) {
-              copyMessage.style.display = 'block';
-
-              if (typeof criarConfete === 'function') {
-                criarConfete();
-              }
-
-              setTimeout(() => {
-                copyMessage.style.display = 'none';
-              }, 3000);
-            }
-          } catch (err) {
-            console.error('Fallback: Erro ao copiar', err);
-          }
-
-          document.body.removeChild(textArea);
-        });
-    });
-  }
-});
