@@ -1,29 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Menu Toggle
+  // Controle do Menu Mobile
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
 
   if (mobileMenuBtn && navLinks) {
     mobileMenuBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
+      e.preventDefault(); // Previne comportamento padrão
+      e.stopPropagation(); // Impede propagação do evento
 
-      // Toggle the navigation menu
+      // Alterna a classe para abrir/fechar o menu
       navLinks.classList.toggle('open');
 
-      // Update the menu button icon and accessibility attributes
+      // Atualiza o ícone do botão e atributos de acessibilidade
       if (navLinks.classList.contains('open')) {
         mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
         mobileMenuBtn.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling while menu is open
+        document.body.style.overflow = 'hidden'; // Impede rolagem enquanto menu está aberto
       } else {
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = ''; // Re-enable scrolling
+        document.body.style.overflow = ''; // Reativa rolagem
       }
     });
 
-    // Close menu when clicking outside
+    // Fechar menu ao clicar fora
     document.addEventListener('click', function (event) {
       if (window.innerWidth <= 768 &&
         navLinks.classList.contains('open') &&
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close menu when clicking a navigation link
+    // Fechar menu ao clicar em um link de navegação
     document.querySelectorAll('.nav-link, .mobile-social-pill').forEach(link => {
       link.addEventListener('click', () => {
         if (window.innerWidth <= 768) {
@@ -48,6 +48,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Detectar navegação por teclado vs. mouse (para acessibilidade)
+  function handleFirstTab(e) {
+    if (e.key === 'Tab') {
+      document.body.classList.add('using-keyboard');
+
+      // Remover este listener já que sabemos que o usuário está usando teclado
+      window.removeEventListener('keydown', handleFirstTab);
+
+      // Adicionar um evento para voltar ao modo mouse quando o mouse for usado
+      window.addEventListener('mousedown', () => {
+        document.body.classList.remove('using-keyboard');
+      });
+    }
+  }
+
+  window.addEventListener('keydown', handleFirstTab);
 
   // Função para copiar a chave PIX
   const copyPIXButton = document.getElementById('copy-pix');
@@ -184,41 +201,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Adicionar smooth scroll para links internos
+  // Adicionar rolagem suave para links internos - VERSÃO CORRIGIDA
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-
+      // Verificar se é um link de navegação real (não um link vazio ou link com função)
       const targetId = this.getAttribute('href');
-      if (targetId === '#') return; // Ignorar links vazios
 
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        // Ajustar o scroll para compensar o menu fixo
-        const navHeight = document.querySelector('nav').offsetHeight;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+      // Ignorar links vazios, links JavaScript ou links da seção de citações
+      if (targetId === '#' || targetId.startsWith('javascript:') || this.classList.contains('social-pill')) {
+        return;
+      }
 
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
+      try {
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          e.preventDefault(); // Prevenir comportamento padrão do link
+
+          // Calcular a posição com ajuste para o header fixo
+          const headerOffset = 80; // Ajuste conforme a altura do seu cabeçalho
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          // Rolar até a posição
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      } catch (error) {
+        console.error("Erro ao rolar para âncora:", error);
       }
     });
   });
 
-  // Back to top button
+  // Botão voltar ao topo
   const backToTopButton = document.getElementById('backToTop');
   if (backToTopButton) {
     // Mostrar/ocultar botão baseado no scroll
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', debounce(() => {
       if (window.scrollY > 300) {
         backToTopButton.classList.add('show');
       } else {
         backToTopButton.classList.remove('show');
       }
-    });
+    }, 100));
 
-    // Scroll para o topo quando o botão é clicado
+    // Rolar para o topo quando o botão é clicado
     backToTopButton.addEventListener('click', () => {
       window.scrollTo({
         top: 0,
@@ -234,12 +263,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (quoteElement) {
       quoteElement.textContent = quote;
       quoteElement.classList.add('show');
+      quoteElement.setAttribute('aria-hidden', 'false');
 
       setTimeout(() => {
         quoteElement.classList.remove('show');
+
+        setTimeout(() => {
+          quoteElement.setAttribute('aria-hidden', 'true');
+        }, 500);
       }, 5000);
     }
   };
+
+  // Destacar item de navegação atual baseado no scroll
+  const sections = document.querySelectorAll('section[id]');
+
+  function highlightNavigation() {
+    const scrollPosition = window.scrollY;
+
+    // Altura do menu para compensar no cálculo
+    const navHeight = document.querySelector('nav').offsetHeight;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - navHeight - 100; // Margem para ativar um pouco antes
+      const sectionBottom = sectionTop + section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+
+      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+
+  // Chamar inicialmente e adicionar evento de scroll
+  highlightNavigation();
+  window.addEventListener('scroll', debounce(highlightNavigation, 100));
 });
 
 // Efeito de confete
@@ -267,7 +330,7 @@ function criarConfete() {
   }
 }
 
-// Debounce
+// Função Debounce - evita execução excessiva de funções durante eventos como scroll
 function debounce(func, wait = 100) {
   let timeout;
   return function (...args) {

@@ -2408,7 +2408,8 @@ footer:before {
     font-size: 16px;
     padding: 10px;
   }
-  .mobile-social-links{
+
+  .mobile-social-links {
     margin-top: 0;
     margin-bottom: 1rem;
   }
@@ -2528,4 +2529,19 @@ textarea:focus {
 #himym-quote.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Remover o outline ao usar mouse, mas manter para navegação por teclado */
+body:not(.using-keyboard) *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Esta classe será adicionada quando o usuário navegar por teclado */
+.using-keyboard a:focus,
+.using-keyboard button:focus,
+.using-keyboard input:focus,
+.using-keyboard textarea:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
